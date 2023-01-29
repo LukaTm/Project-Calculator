@@ -64,6 +64,7 @@ function calc(){
 const equalSign = document.querySelector('.equal')
 equalSign.addEventListener("click", () => {
     calc()
+    display = ''
 })
 
 
