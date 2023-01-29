@@ -1,0 +1,11 @@
+
+.calculator{
+    display: flex;
+    justify-content: center;
+}
+.calc-in {
+    width: 350px;
+    height: 660px;
+    background-color: red;
+    border-radius: 15px;
+}
