@@ -51,6 +51,7 @@ for (x= 0;x< 4;x++){
             console.log('this display2' + display)
             console.log('this storage2' + storage)
         }
+        checkEqual = 0
     });
 }
 // Calculates two numbers
@@ -67,13 +68,21 @@ function calc(){
 }
 
 // Equal sign
+let checkEqual = 0
 const equalSign = document.querySelector('.equal')
 equalSign.addEventListener("click", () => {
-    calc()
-    storage = screenDisplay.textContent
-    display = ''
-    console.log('this displayyy' + display)
-    console.log('this storageee' + storage)
+    if (checkEqual > 0){
+        return;
+    }
+    else{
+        calc()
+        storage = screenDisplay.textContent
+        display = ''
+        console.log('this displayyy' + display)
+        console.log('this storageee' + storage)
+        checkEqual = 1
+    }
+
 })
 
 
