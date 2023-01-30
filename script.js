@@ -10,7 +10,7 @@ const multiply = (mult1,mult2) => screenDisplay.textContent = mult1 * mult2;
 const divide = (div1,div2) => screenDisplay.textContent = div1/div2;
 
 
-let storage = '' // 50
+let storage = '' 
 let userOperation
 let display = ''
 function displayNum(num){
@@ -62,6 +62,8 @@ for (x= 0;x< 4;x++){
 }
 // Calculates two numbers
 function calc(){
+    if (display == 0)
+        return screenDisplay.textContent = 0
     if (userOperation == 'add') 
         add(Number(storage),Number(display));
     if (userOperation == 'subtract') 
