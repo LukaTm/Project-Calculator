@@ -1,5 +1,6 @@
 const screenDisplay = document.querySelector('.display')
-const clear = document.querySelector('.clear')
+const clearButton = document.querySelector('.clear')
+const deleteButton = document.querySelector('.delete')
 
 
 // Math function
@@ -24,13 +25,18 @@ for (x= 0;x< numList.length;x++){
     num.addEventListener("click", () => displayNum(num.textContent));
 }
 //Clear Button
-clear.addEventListener("click", () => {
+clearButton.addEventListener("click", () => {
     storage = ''
     display = ''
     screenDisplay.textContent = ''
 })
 
 // Buttons -+/*
+deleteButton.addEventListener("click", () => {
+    let newDisplay = screenDisplay.textContent = screenDisplay.textContent.slice(0,-1)
+    display = newDisplay
+})
+
 const operatorList = ['divide','multiply','subtract','add']
 for (x= 0;x< 4;x++){
     const operatorSelect = document.querySelector(`.${operatorList[x]}`)
