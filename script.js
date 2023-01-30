@@ -1,4 +1,5 @@
 const screenDisplay = document.querySelector('.display')
+const clear = document.querySelector('.clear')
 
 
 // Math function
@@ -7,9 +8,8 @@ const subtract = (sub1,sub2) => screenDisplay.textContent = sub1 - sub2;
 const multiply = (mult1,mult2) => screenDisplay.textContent = mult1 * mult2;
 const divide = (div1,div2) => screenDisplay.textContent = div1/div2;
 
-//
+
 let storage = '' // 50
-let storage2 = ''
 let userOperation
 let display = ''
 function displayNum(num){
@@ -23,8 +23,13 @@ for (x= 0;x< numList.length;x++){
     let num = document.querySelector(`.${numList[x]}`);
     num.addEventListener("click", () => displayNum(num.textContent));
 }
+//Clear Button
+clear.addEventListener("click", () => {
+    storage = ''
+    display = ''
+    screenDisplay.textContent = ''
+})
 
-// userOperation
 // Buttons -+/*
 const operatorList = ['divide','multiply','subtract','add']
 for (x= 0;x< 4;x++){
@@ -40,7 +45,7 @@ for (x= 0;x< 4;x++){
             console.log(userOperation)
         }
         else {
-            storage = display;
+            storage = screenDisplay.textContent;
             display = ''
             userOperation = operatorSelect.className
             console.log('this display2' + display)
@@ -48,7 +53,7 @@ for (x= 0;x< 4;x++){
         }
     });
 }
-
+// Calculates two numbers
 function calc(){
     if (userOperation == 'add') 
         add(Number(storage),Number(display));
@@ -61,11 +66,14 @@ function calc(){
     
 }
 
+// Equal sign
 const equalSign = document.querySelector('.equal')
 equalSign.addEventListener("click", () => {
     calc()
+    storage = screenDisplay.textContent
     display = ''
+    console.log('this displayyy' + display)
+    console.log('this storageee' + storage)
 })
-
 
 
