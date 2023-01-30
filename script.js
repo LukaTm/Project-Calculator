@@ -4,10 +4,10 @@ const deleteButton = document.querySelector('.delete')
 
 
 // Math function
-const add = (add1,add2) => screenDisplay.textContent = add1+add2;
-const subtract = (sub1,sub2) => screenDisplay.textContent = sub1 - sub2;
-const multiply = (mult1,mult2) => screenDisplay.textContent = mult1 * mult2;
-const divide = (div1,div2) => screenDisplay.textContent = div1/div2;
+const add = (add1,add2) => screenDisplay.textContent = (add1+add2).toFixed(2);
+const subtract = (sub1,sub2) => screenDisplay.textContent = (sub1 - sub2).toFixed(2);
+const multiply = (mult1,mult2) => screenDisplay.textContent = (mult1 * mult2).toFixed(2);
+const divide = (div1,div2) => screenDisplay.textContent = (div1/div2).toFixed(2);
 
 
 let storage = '' 
