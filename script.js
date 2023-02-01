@@ -5,15 +5,10 @@ const dotButton = document.querySelector('.dot')
 
 
 // Math function
-const add = (add1,add2) => screenDisplay.textContent = (add1+add2);
-const subtract = (sub1,sub2) => screenDisplay.textContent = (sub1 - sub2);
-const multiply = (mult1,mult2) => screenDisplay.textContent = (mult1 * mult2);
-const divide = (div1,div2) => screenDisplay.textContent = (div1/div2);
-
-const add2 = (add1,add2) => screenDisplay.textContent = (add1+add2).toFixed(2);
-const subtract2 = (sub1,sub2) => screenDisplay.textContent = (sub1 - sub2).toFixed(2);
-const multiply2 = (mult1,mult2) => screenDisplay.textContent = (mult1 * mult2).toFixed(2);
-const divide2 = (div1,div2) => screenDisplay.textContent = (div1/div2).toFixed(2);
+const add = (add1,add2) => screenDisplay.textContent = (add1+add2).toFixed(3);
+const subtract = (sub1,sub2) => screenDisplay.textContent = (sub1 - sub2).toFixed(3);
+const multiply = (mult1,mult2) => screenDisplay.textContent = (mult1 * mult2).toFixed(3);
+const divide = (div1,div2) => screenDisplay.textContent = (div1/div2).toFixed(3);
 
 
 let storage = ''
@@ -24,18 +19,26 @@ function displayNum(num){
     screenDisplay.textContent = display;
 }
 // Dot BUtton
+let dotCount
 dotButton.addEventListener("click", () => {
-    if (display[display.length - 1] == '.')
-        return;
-    else 
+    for ( x=0;x < display.length;x++){
+        if (display[x] == '.')
+            return;
+        else
+            dotCount = 1
+    }
+    if (dotCount === 1)
         displayNum('.');
+        dotCount = 0
 })
 
 // Buttons 0-9
 const numList = ['zero','one','two','three','four','five','six','seven','eight','nine']
 for (x= 0;x< numList.length;x++){
     let num = document.querySelector(`.${numList[x]}`);
-    num.addEventListener("click", () => displayNum(num.textContent));
+    num.addEventListener("click", () => {
+    displayNum(num.textContent);
+});
 }
 //Clear Button
 clearButton.addEventListener("click", () => {
@@ -59,9 +62,6 @@ for (x= 0;x< 4;x++){
             userOperation = operatorSelect.className
             storage = screenDisplay.textContent
             display = ''
-            console.log('this display' + display)
-            console.log('this storage' + storage)
-            console.log(userOperation)
         }
         else {
             storage = screenDisplay.textContent;
@@ -72,32 +72,27 @@ for (x= 0;x< 4;x++){
     });
 }
 // Calculates two numbers
-
 function calc(){
     if (display == 0)
         return screenDisplay.textContent = 0
-    if (screenDisplay.textContent.indexOf(".") !== -1){
-        console.log('Passed')
-        if (userOperation == 'add') 
-            add2(Number(storage),Number(display));
-        if (userOperation == 'subtract') 
-            subtract2(Number(storage),Number(display));
-        if (userOperation == 'divide') 
-            divide2(Number(storage),Number(display));
-        if (userOperation == 'multiply') 
-            multiply2(Number(storage),Number(display));
-    }
-    else{
-        if (userOperation == 'add') 
-            add(Number(storage),Number(display));
-        if (userOperation == 'subtract') 
-            subtract(Number(storage),Number(display));
-        if (userOperation == 'divide') 
-            divide(Number(storage),Number(display));
-        if (userOperation == 'multiply') 
-            multiply(Number(storage),Number(display));
-    }
-
+    if (userOperation == 'add') 
+        add(Number(storage),Number(display));
+    if (userOperation == 'subtract') 
+        subtract(Number(storage),Number(display));
+    if (userOperation == 'divide') 
+        divide(Number(storage),Number(display));
+    if (userOperation == 'multiply') 
+        multiply(Number(storage),Number(display));
+   
+    for (let x = screenDisplay.textContent.length-1; x > 0; x--) {
+        if (screenDisplay.textContent[x] !== '0') {
+            break;
+        }
+        if (screenDisplay.textContent[x-1] === '.') {
+            screenDisplay.textContent = screenDisplay.textContent.slice(0, screenDisplay.textContent.indexOf("."));
+            break;
+        }
+    }  
 }
 
 // Equal sign
@@ -113,7 +108,6 @@ equalSign.addEventListener("click", () => {
         display = ''
         checkEqual = 1
     }
-
 })
 
 
