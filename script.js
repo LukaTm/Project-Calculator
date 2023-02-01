@@ -18,7 +18,7 @@ function displayNum(num){
     display += num;
     screenDisplay.textContent = display;
 }
-// Dot BUtton
+// Dot Button
 let dotCount
 dotButton.addEventListener("click", () => {
     for ( x=0;x < display.length;x++){
@@ -57,9 +57,14 @@ const operatorList = ['divide','multiply','subtract','add']
 for (x= 0;x< 4;x++){
     const operatorSelect = document.querySelector(`.${operatorList[x]}`)
     operatorSelect.addEventListener("click", () => {
-        if (storage !== '' && display !== ''){
-            calc()
+        if (checkEqual > 0){
+            storage = screenDisplay.textContent;
+            display = ''
             userOperation = operatorSelect.className
+        }
+        else if (storage !== '' && display !== ''){
+            userOperation = operatorSelect.className
+            calc()
             storage = screenDisplay.textContent
             display = ''
         }
@@ -73,8 +78,8 @@ for (x= 0;x< 4;x++){
 }
 // Calculates two numbers
 function calc(){
-    if (display == 0)
-        return screenDisplay.textContent = 0
+    if (display == 0 && userOperation == 'divide')
+        return screenDisplay.textContent = 0 
     if (userOperation == 'add') 
         add(Number(storage),Number(display));
     if (userOperation == 'subtract') 
@@ -83,7 +88,8 @@ function calc(){
         divide(Number(storage),Number(display));
     if (userOperation == 'multiply') 
         multiply(Number(storage),Number(display));
-   
+
+    // Fix decimals (7.00 will be 7)
     for (let x = screenDisplay.textContent.length-1; x > 0; x--) {
         if (screenDisplay.textContent[x] !== '0') {
             break;
@@ -99,6 +105,7 @@ function calc(){
 let checkEqual = 0
 const equalSign = document.querySelector('.equal')
 equalSign.addEventListener("click", () => {
+
     if (checkEqual > 0){
         return;
     }
